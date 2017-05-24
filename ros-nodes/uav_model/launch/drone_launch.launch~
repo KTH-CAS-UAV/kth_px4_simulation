@@ -1,0 +1,80 @@
+<launch>
+	<!-- launch other launch files and eat lunch-->
+		<!-- launch state publisher of rviz drone model -->
+			<include file="$(find drone_model)/launch/state_publisher.launch"/>
+
+		<!-- launch mavros px4 TODO:: adjust udp mabey?? -->
+			<include file="$(find mavros)/launch/px4.launch">
+				<arg name="fcu_url" value="udp://:14540@192.168.1.36:14557"/>				
+			</include>
+		
+
+	<!-- launch nodes-->
+		
+		<!-- tf node -->
+			<node name="tf_pub" pkg="tf_pub" type="tf_pub" output="screen" />
+			
+			<node pkg="tf" type="static_transform_publisher" name="tf_cameras" args=" 0 0 0 0 0 0 d_camera camera_link 10" />
+			<node pkg="tf" type="static_transform_publisher" name="tf_world_target" args=" 1.0 0 1.6 0 0 0 world target 10" />
+
+			<!--node pkg="tf" type="static_transform_publisher" name="tf_world_fcu" args=" 0.0 0 0.0 0 0 0 world fcu 10" /-->
+
+		<!-- build cloud of object node -->
+			<node name="object_octo" pkg="object_octo" type="object_octo" >
+				<remap from="/cloud_in" to="/camera/depth/points" />
+			</node>
+
+		<!-- map cloud node --> 
+			<!--node name="map_as_pointcloude" pkg="map_as_pointcloude" type="map_as_pointcloude"/-->
+
+		<!-- rely map cloud to camera depth for octo-->
+			<!--node name="relay" pkg="topic_tools" type="relay" args="/map/cage_cloud /camera/depth/points "/-->
+
+	<!-- Controll nodes-->
+		<!-- Rviz manual controll node -->
+			<!--node name="rviz_controll" pkg="rviz_controll" type="rviz_controll" output="screen" /-->
+
+		<!-- simple automatic controll node -->
+			<node name="simple_vp" pkg="simple_vp" type="simple_vp" output="screen" >
+				<param name="vp_radius" type="string" value="0.85" />
+				<param name="num_vp" type="string" value="10.0" />
+				<param name="vp_z" type="string" value="1.0" />
+			</node>
+
+
+
+<!-- Octomap Server -->
+<node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+    <param name="resolution" value="0.05" />
+
+    <!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
+    <param name="frame_id" type="string" value="/world" />
+
+    <!-- maximum range to integrate (speedup!) -->
+    <param name="max_sensor_range" value="5.0" />
+
+    <!-- publish free space -->
+    <param name="publish_free_space" value="true" />
+
+    <!-- get rid of ground plane with NO filter-->
+    <!--param name="pointcloud_[min|max]_z" value="0.1/2.9" /-->
+    <!--param name="occupancy_[min|max]_z" value="0.1/2.9" /-->
+    <param name="occupancy_min_z" value="0.2"/>
+    <param name="occupancy_max_z" value="2.8"/>
+
+    <!-- get rid of ground plane with filter-->
+    <!--param name="filter_ground" value="true" /-->
+    <!--param name="base_frame_id" value="world" /-->
+    <!--param name="ground_filter/distance" value="0.1" /-->
+    
+
+
+    <param name="latch" value="false" />
+    <!-- data source to integrate (PointCloud2) -->
+    <remap from="cloud_in" to="/camera/depth/points" />
+
+</node>
+	
+	<!-- start rviz-->
+		<!--node name="visualisation" pkg="rviz" type="rviz" output="screen" /-->
+</launch>

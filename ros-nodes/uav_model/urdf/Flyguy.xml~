@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro" name="flyguy">
+
+  <link name="drone_base">
+    <visual>
+      <geometry>
+        <box size="0.15 .20 .01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+	<material name="rgb">
+	<color rgba="0 1.0 1.0 1.0"/>
+	</material>
+    </visual>
+  </link>
+
+  <link name="fcu_controller">
+    <visual>
+      <geometry>
+        <box size="0.05 .05 .02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+	<material name="rgb">
+	<color rgba="0 1.0 1.0 1.0"/>
+	</material>
+    </visual>
+  </link>
+
+ <joint name="drone_base_to_fcu_controller" type="fixed">
+    <parent link="drone_base"/>
+    <child link="fcu_controller"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+ <link name="x-wing1">
+    <visual>
+      <geometry>
+        <box size="0.01 25.0 .01"/>
+      </geometry>
+      <origin rpy="0 0 0.7" xyz="0 0 0.0"/>
+	<material name="rgb">
+	<color rgba="0 1.0 1.0 1.0"/>
+	</material>
+    </visual>
+  </link>
+
+ <joint name="drone_base_to_x-wing1" type="fixed">
+    <parent link="drone_base"/>
+    <child link="x-wing1"/>
+    <origin rpy="0.0 0.0 0.7" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+
+<!--
+ <link name="x-wing2">
+    <visual>
+      <geometry>
+        <box size="0.01 25.0 .01"/>
+      </geometry>
+      <origin rpy="0 0 0.0" xyz="0 0 0.0"/>
+	<material name="rgb">
+	<color rgba="0 1.0 1.0 1.0"/>
+	</material>
+    </visual>
+  </link>
+
+
+ <joint name="drone_base_to_x-wing2" type="fixed">
+    <parent link="drone_base"/>
+    <child link="x-wing2"/>
+    <origin rpy="0.0 0.0 -0.7" xyz="0.0 0.0 0.0"/>
+  </joint>
+-->
+
+<!--
+ <link name="d_camera">
+    <visual>
+      <geometry>
+        <box size=".05 .05 .05"/>
+      </geometry>
+      <origin rpy="0 0.0 0 " xyz="0.0 0.0 0.0"/>
+	<material name="black">
+	<color rgba="0.0 0.0 0.0 1.0"/>
+	</material>
+    </visual>
+  </link>
+
+  <joint name="drone_base_to_d_camera" type="fixed">
+    <parent link="drone_base"/>
+    <child link="d_camera"/>
+    <origin rpy="0.026 0.649 0.014" xyz="0.193 0.082 -0.256"/>
+  </joint>
+-->
+
+<!--
+  <link name="d_camera::camera_link"/>
+  <joint name="d_camera_to_camera_link" type="fixed">
+    <parent link="d_camera"/>
+    <child link="d_camera::camera_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <origin rpy="-1.57 0 -1.57" xyz="0.0 0.0 0.0"/>
+  </joint>
+-->
+
+
+
+</robot>

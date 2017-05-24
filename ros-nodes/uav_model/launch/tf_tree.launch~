@@ -1,0 +1,5 @@
+<launch>
+  <!-- tf tree-->
+    <node name="tf_tree" pkg="uav_model" type="tf_tree" output="screen" />			
+    <!--<node pkg="tf" type="static_transform_publisher" name="tf_cameras" args=" 0 0 0 0 0.0 0 d_camera camera_link 10" />    -->    
+</launch>

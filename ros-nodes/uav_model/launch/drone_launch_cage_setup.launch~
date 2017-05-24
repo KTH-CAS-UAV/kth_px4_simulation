@@ -1,0 +1,28 @@
+<launch>
+	<!-- launch other launch files and eat lunch-->
+
+		<!-- launch mavros px4 TODO:: adjust udp mabey?? -->
+			<include file="$(find mavros)/launch/px4.launch"/>
+
+		<!-- launch mavros optitrack node ?? -->
+			<include file="$(find mocap_optitrack)/launch/mocap.launch">				
+			</include>
+
+		<!-- launch state publisher of rviz drone model -->
+			<include file="$(find drone_model)/launch/state_publisher.launch"/>
+
+		<!-- launch openni stuff -->
+			<include file="$(find openni2_launch)/launch/openni2.launch"/>
+
+
+	<!-- launch nodes-->
+				
+		<!-- tf node -->
+			<node name="tf_pub" pkg="tf_pub" type="tf_pub" output="screen" />
+			
+			<node pkg="tf" type="static_transform_publisher" name="tf_cameras" args=" 0 0 0 0 0 0 d_camera camera_link 10" />
+			<node pkg="tf" type="static_transform_publisher" name="tf_world_target" args="0.0 0 1.6 0 0 0 world target 10" />
+
+			<!--node pkg="tf" type="static_transform_publisher" name="tf_world_fcu" args=" 0.0 0 0.0 0 0 0 world fcu 10" /-->
+		
+</launch>

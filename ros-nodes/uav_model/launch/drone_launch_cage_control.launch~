@@ -1,0 +1,52 @@
+<launch>
+	<!-- launch other launch files and eat lunch-->
+
+		<!-- launch mavros px4 TODO:: adjust udp mabey?? -->
+			<include file="$(find mavros)/launch/px4.launch"/>
+
+		<!-- launch mavros optitrack node ?? -->
+			<include file="$(find mocap_optitrack)/launch/mocap.launch">				
+			</include>
+
+		<!-- launch state publisher of rviz drone model -->
+			<include file="$(find drone_model)/launch/state_publisher.launch"/>
+
+		<!-- launch realsense stuff -->
+			<!--include file="$(find realsense_camera)/launch/sr300_nodelet_rgbd.launch"/-->
+
+
+	<!-- launch nodes-->
+				
+		<!-- tf node -->
+			<node name="tf_pub" pkg="tf_pub" type="tf_pub" output="screen" />
+			
+			<node pkg="tf" type="static_transform_publisher" name="tf_cameras" args=" 0 0 0 0 0 0 d_camera camera_link 10" />
+			<node pkg="tf" type="static_transform_publisher" name="tf_world_target" args="0.0 0 1.6 0 0 0 world target 10" />
+
+			<!--node pkg="tf" type="static_transform_publisher" name="tf_world_fcu" args=" 0.0 0 0.0 0 0 0 world fcu 10" /-->
+
+		<!-- build cloud of object node -->
+			<!--node name="object_octo" pkg="object_octo" type="object_octo" >
+				<remap from="/cloud_in" to="/camera/depth/points" />
+			</node-->
+
+		<!-- map cloud node --> 
+			<!--node name="map_as_pointcloude" pkg="map_as_pointcloude" type="map_as_pointcloude"/-->
+
+		<!-- rely map cloud to camera depth for octo-->
+			<!--node name="relay" pkg="topic_tools" type="relay" args="/map/cage_cloud /camera/depth/points "/-->
+
+	<!-- Controll nodes-->
+		<!-- Rviz manual controll node -->
+			<!--node name="rviz_controll" pkg="rviz_controll" type="rviz_controll" output="screen" /-->
+
+		<!-- simple automatic controll node -->
+			<!--node name="simple_vp" pkg="simple_vp" type="simple_vp" output="screen" >
+				<param name="vp_radius" type="string" value="0.85" />
+				<param name="num_vp" type="string" value="10.0" />
+				<param name="vp_z" type="string" value="1.0" />
+			</node-->
+
+<!-- start rviz-->
+		<!--node name="visualisation" pkg="rviz" type="rviz" output="screen" /-->
+</launch>

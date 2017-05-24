@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro" name="sim_drone">
+ 
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <material name="red">
+    <color rgba="1 0 0 1"/>
+  </material>
+
+ <material name="green">
+    <color rgba="0 1 0 1"/>
+  </material>
+
+
+  <link name="drone_base">
+    <visual>
+      <geometry>
+        <box size="0.15 .1 .01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+	<material name="blue">
+	</material>
+    </visual>
+  </link>
+
+  <link name="fcu_controller">
+    <visual>
+      <geometry>
+        <box size="0.05 .05 .02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+	<material name="blue">
+	</material>
+    </visual>
+  </link>
+
+ <joint name="drone_base_to_fcu_controller" type="fixed">
+    <parent link="drone_base"/>
+    <child link="fcu_controller"/>
+    <origin rpy="0 0 0" xyz="0 0 0.02"/>
+  </joint>
+
+ <link name="nuc">
+    <visual>
+      <geometry>
+        <box size="0.1 .1 .03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+	<material name="green">
+	</material>
+    </visual>
+  </link>
+
+ <joint name="drone_base_to_nuc" type="fixed">
+    <parent link="drone_base"/>
+    <child link="nuc"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.02"/>
+  </joint>
+
+  <link name="mocap_center">
+    <visual>
+      <geometry>
+        <box size="0.02 .02 .01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 -0.0 0"/>
+	<material name="white">
+	</material>
+    </visual>
+  </link>
+
+ <joint name="drone_base_to_Mocap_center" type="fixed">
+    <parent link="drone_base"/>
+    <child link="mocap_center"/>
+    <origin rpy="0 0 0" xyz="0 -0.02 0.1"/>
+  </joint>
+
+ <link name="x-wing1">
+    <visual>
+      <geometry>
+        <box size="0.01 0.25 .01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+	<material name="blue">
+	</material>
+    </visual>
+  </link>
+
+ <link name="x-wing2">
+    <visual>
+      <geometry>
+        <box size="0.01 0.25 .01"/>
+      </geometry>
+      <origin rpy="0 0 -0" xyz="0 0 0.0"/>
+	<material name="blue">
+	</material>
+    </visual>
+  </link>
+
+ <joint name="drone_base_to_x-wing1" type="fixed">
+    <parent link="drone_base"/>
+    <child link="x-wing1"/>
+    <origin rpy="0 0 0.7" xyz="0 0 0.0"/>
+  </joint>
+
+ <joint name="drone_base_to_x-wing2" type="fixed">
+    <parent link="drone_base"/>
+    <child link="x-wing2"/>
+    <origin rpy="0 0 -0.7" xyz="0 0 0.0"/>
+  </joint>
+
+ <link name="rotor1">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 .05"/>
+      </geometry>
+      <origin rpy="0 0 0.0" xyz="0.0 0.0 0.0"/>
+	<material name="red">
+	</material>
+    </visual>
+  </link>
+
+ <joint name="x-wing1_to_rotor1" type="fixed">
+    <parent link="x-wing1"/>
+    <child link="rotor1"/>
+    <origin rpy="0 0 0.0" xyz="0.125 0.025 0.0"/>
+  </joint>
+
+ <link name="rotor2">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 .05"/>
+      </geometry>
+      <origin rpy="0 0 0.0" xyz="-0.0 -0.0 0.0"/>
+	<material name="red">
+	</material>
+    </visual>
+  </link>
+
+ <joint name="x-wing1_to_rotor2" type="fixed">
+    <parent link="x-wing1"/>
+    <child link="rotor2"/>
+    <origin rpy="0 0 0.0" xyz="-0.125 -0.025 0.0"/>
+  </joint>
+
+ <link name="rotor3">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 .05"/>
+      </geometry>
+      <origin rpy="0 0 0.0" xyz="-0.0 0.0 0.0"/>
+	<material name="red">
+	</material>
+    </visual>
+  </link>
+
+ <joint name="x-wing2_to_rotor3" type="fixed">
+    <parent link="x-wing2"/>
+    <child link="rotor3"/>
+    <origin rpy="0 0 0.0" xyz="-0.125 0.025 0.0"/>
+  </joint>
+
+ <link name="rotor4">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 .05"/>
+      </geometry>
+      <origin rpy="0 0 0.0" xyz="0.0 -0.0 0.0"/>
+	<material name="red">
+	</material>
+    </visual>
+  </link>
+
+ <joint name="x-wing2_to_rotor4" type="fixed">
+    <parent link="x-wing2"/>
+    <child link="rotor4"/>
+    <origin rpy="0 0 0.0" xyz="0.125 -0.025 0.0"/>
+  </joint>
+
+
+ <link name="d_camera">
+    <visual>
+      <geometry>
+        <box size=".01 .05 .01"/>
+      </geometry>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+	<material name="black">
+	</material>
+    </visual>
+  </link>
+
+  <joint name="drone_base_to_d_camera" type="fixed">
+    <parent link="drone_base"/>
+    <child link="d_camera"/>
+    <origin rpy="0.0 0.64 0 " xyz="0.075 0.0 0.0"/>
+  </joint>
+
+  <link name="d_camera::camera_link"/>
+  <joint name="d_camera_to_camera_link" type="fixed">
+    <parent link="d_camera"/>
+    <child link="d_camera::camera_link"/>
+    <origin rpy="-1.57 0 -1.57" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+
+
+
+</robot>

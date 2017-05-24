@@ -1,0 +1,47 @@
+<launch>
+  <!-- defult launch script for KTH/CSC px4 simulation -->
+  
+  <!--gazebo-->
+    <include file="$(find px4)/launch/posix_sitl.launch">
+      <arg name="vehicle" value="iris_cam" />	
+      <arg name="world" value="$(find mavlink_sitl_gazebo)/worlds/cage.world" />	
+      <arg name="gui" value="true" />		
+      <arg name="z" value="0.02" />			
+    </include>
+
+  <!--rviz -->
+    <node name="visualisation" pkg="rviz" type="rviz" output="screen" />
+
+  <!-- mavros px4 -->
+    <include file="$(find mavros)/launch/px4.launch">
+      <arg name="fcu_url" value="udp://:14540@127.0.0.1:14557" />				
+    </include>
+
+  <!-- robo state publisher + tf -->
+    <include file="$(find uav_model)/launch/state_publisher.launch"/>
+    <include file="$(find uav_model)/launch/uav_tf.launch"/>
+
+  <!-- setpoint control node -->
+    <node name="setpoint_control" pkg="setpoint_control" type="setpoint_control" output="screen" />
+    <!-- sart rqt_reconfigure for hight -->
+      <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" />    
+
+  <!-- teleop control node -->
+ 
+	
+		
+
+  <!-- Octomap Server -->
+    <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+      <param name="resolution" value="0.1" />
+      <param name="frame_id" type="string" value="/world" />
+      <param name="max_sensor_range" value="5.0" />
+      <param name="publish_free_space" value="true" />
+      <param name="occupancy_min_z" value="0.2"/>
+      <param name="occupancy_max_z" value="5.0"/>
+      <param name="latch" value="false" />
+     <!-- data source to integrate (PointCloud2) -->
+      <remap from="cloud_in" to="/camera/depth/points" />
+    </node>
+	
+</launch>

@@ -1,0 +1,13 @@
+<launch>
+  <!--Orbslam launch -->
+    <node name="ORB_SLAM2" pkg="ORB_SLAM2" type="RGBD" args="/home/lericson/src/orb_slam2/Vocabulary/ORBvoc.txt
+ /home/lericson/src/orb_slam2/Examples/ROS/ORB_SLAM2/Asus.yaml">
+      <arg name="rgb_image" value="/camera/rgb/image_raw" />
+      <arg name="depth_image" value="/camera/depth/image_raw" />
+      <arg name="pose" value="/mavros/vision_pose/pose" />
+    
+    </node>
+
+
+
+</launch>
