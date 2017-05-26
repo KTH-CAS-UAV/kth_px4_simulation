@@ -14,16 +14,16 @@ todo:
 
 ## gazebo-assets 
 todo:
-- [] include the simple world files (cage simulation, Daniels maze, etc)
-- [] include models of custemized drones (with lidar, d-camera etc)
+- [] include the simple world files ([x] cage simulation, Daniels maze, etc)
+- [] include models of custemized drones (with lidar, [x] d-camera etc)
 
 ## ros-nodes 
 todo:
 - [] teleop node for joystick control
-- [] offboard node for rviz control
-- [] launch examples:
--- [] example with octomap and custem world
+- [x] offboard node for rviz control
+- [] launch examples:  
+-- [x] example with octomap and custem world  
 -- [] ???
-- [] simple urdf drone model for rviz visu (if more time and more Kevin we can try using mashes and stuff)
+- [x] simple urdf drone model for rviz visu ( [] if more time and more Kevin we can try using mashes and stuff)
 
 
