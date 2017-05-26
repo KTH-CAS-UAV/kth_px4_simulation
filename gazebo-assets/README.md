@@ -1,0 +1,21 @@
+# Gazebo assets for kth px4 simulation
+
+Contains assest for gazebo needed for the simulation
+
+## Models 
+
+Models needed for the simulation like modified drones etc.
+
+```bash
+# Set the model path so Gazebo finds the extra models
+export GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:$HOME/catkin_ws/src/kth_px4_simulation/gazebo-assets/models
+```
+
+## Worlds
+
+Worlds needed for the simulation like cage world etc.
+
+
+
+
+
