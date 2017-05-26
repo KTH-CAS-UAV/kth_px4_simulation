@@ -4,7 +4,7 @@
   <!--gazebo-->
     <include file="$(find px4)/launch/posix_sitl.launch">
       <arg name="vehicle" value="iris_cam" />	
-      <arg name="world" value="$(find kth_px4_simulation)/gazebo-assets/worlds/cage.world" />	
+      <arg name="world" value="$(find uav_model)../../gazebo-assets/worlds/cage.world" />	
       <arg name="gui" value="true" />		
       <arg name="z" value="0.02" />			
     </include>
