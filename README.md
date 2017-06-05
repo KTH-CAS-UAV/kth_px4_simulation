@@ -15,7 +15,7 @@ todo:
 ## gazebo-assets 
 todo:
 - [] include the simple world files ([x] cage simulation, Daniels maze, etc)
-- [] include models of custemized drones (with lidar, [x] d-camera etc)
+- [] include models of custemized drones ([]with lidar, [x] d-camera etc)
 
 ## ros-nodes 
 todo:
@@ -25,5 +25,6 @@ todo:
 -- [x] example with octomap and custem world  
 -- [] ???
 - [x] simple urdf drone model for rviz visu ( [] if more time and more Kevin we can try using mashes and stuff)
+- [] include iris drone with smaller hitbox for collision avoidence.
 
 
