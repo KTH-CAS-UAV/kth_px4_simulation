@@ -1,0 +1,11 @@
+Follow this 2 tutorials in order to add a sensor to a robot model.  
+
+Gazebo plugins in ROS:
+http://gazebosim.org/tutorials?tut=ros_gzplugins
+
+Add a Sensor to a Robot:
+http://gazebosim.org/tutorials?tut=add_laser
+
+
+Check out the model folder for examples.
+
